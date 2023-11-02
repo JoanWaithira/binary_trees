@@ -43,5 +43,6 @@ int binary_tree_is_complete_recursion(const binary_tree_t *tree, int index,
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
-	return (binary_tree_is_complete_recursion(tree, 0, binary_tree_size(tree)));
+	return (binary_tree_is_complete_recursion(tree, 0,
+				(int)binary_tree_size(tree)));
 }

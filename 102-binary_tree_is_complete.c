@@ -32,3 +32,16 @@ int binary_tree_is_complete_recursion(const binary_tree_t *tree, int index,
 		return (0);
 	return (binary_tree_is_complete_recursion(tree->left, 2 * index + 1, size)
 		&& binary_tree_is_complete_recursion(tree->right, 2 * index + 2, size));
+}
+
+/**
+ * binary_tree_is_complete - Wrapper function for the recursion version.
+ *
+ * @tree: The tree.
+ *
+ * Return: 1 if complete. 0 otherwise.
+ */
+int binary_tree_is_complete(const binary_tree_t *tree)
+{
+	return (binary_tree_is_complete_recursion(tree, 0, binary_tree_size(tree)));
+}

@@ -10,39 +10,33 @@
  */
 bst_t *bst_insert(bst_t **tree, int value)
 {
-	bst_t *browser, *new_node;
+	bst_t *browser;
 
-	if (!tree)
-		return (NULL);
-	new_node = malloc(sizeof(bst_t));
-	if (!new_node)
-		return (NULL);
-
-	new_node->n = value;
-	new_node->parent = NULL;
-	new_node->right = NULL;
-	new_node->left = NULL;
-
-	if (!(*tree))
+	if (!*tree)
 	{
-		*tree = new_node;
-		return (new_node);
+		*tree = binary_tree_node(NULL, value);
+		return (*tree);
 	}
 	browser = *tree;
-
-	while (browser->left && browser->right)
+	while (browser)
 	{
-		if (new_node->n < browser->n)
+		if (value == browser->n)
+			return (NULL);
+		else if (value > browser->n)
 		{
-			browser = browser->left;
-			continue;
+			if (browser->right == NULL)
+			{
+				browser->right = binary_tree_node(browser, value);
+				return (browser->right);
+			}
+			browser = browser->right;
 		}
-		browser = browser->right;
+		if (browser->left == NULL)
+		{
+			browser->left = binary_tree_node(browser, value);
+			return (browser->left);
+		}
+		browser = browser->left;
 	}
-	new_node->parent = browser;
-	if (browser->n < new_node->n)
-		browser->left = new_node;
-	else
-		browser->right = new_node;
-	return (new_node);
+	return (NULL);
 }

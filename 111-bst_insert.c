@@ -31,12 +31,15 @@ bst_t *bst_insert(bst_t **tree, int value)
 			}
 			browser = browser->right;
 		}
-		if (browser->left == NULL)
+		else if (value < browser->n)
 		{
-			browser->left = binary_tree_node(browser, value);
-			return (browser->left);
+			if (browser->left == NULL)
+			{
+				browser->left = binary_tree_node(browser, value);
+				return (browser->left);
+			}
+			browser = browser->left;
 		}
-		browser = browser->left;
 	}
 	return (NULL);
 }
